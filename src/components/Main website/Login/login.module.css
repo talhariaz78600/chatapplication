@@ -1,0 +1,34 @@
+.buttonLogin {
+  background-color: #36bd5c;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.otherroute {
+  background-color: transparent;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  color: rgb(15, 15, 118);
+  border-radius: 10px;
+}
+
+.buttonLogin:hover {
+  background-color: #7deb9c;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.scrollHeight {
+  overflow-y: scroll;
+}
+
+
+.scrollHeight::-webkit-scrollbar-thumb {
+  background-color: #888;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+}
