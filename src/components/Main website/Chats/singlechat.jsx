@@ -5,6 +5,7 @@ import { selecteCurrentUser, selecteUsers } from "../../Store/authSlice";
 import { Link } from "react-router-dom";
 import io from 'socket.io-client';
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export function SingleChat(props) {
     const { roomID } = props;
@@ -36,7 +37,13 @@ export function SingleChat(props) {
 
         socket.on('newMessage', (newMessage) => {
             console.log(newMessage);
-            setMessages((prevMessages) => [...prevMessages, newMessage]);
+            console.log(newMessage.senderId,"second",otherUserData._id)
+            if(newMessage.senderId===otherUserData._id){ 
+                setMessages((prevMessages) => [...prevMessages, newMessage]);
+            }else{
+                const data=allusers.find((item)=>item._id===newMessage.senderId)
+                toast.success(`${data.username} sent you a message`)
+            }
         });
 
         socket.on('getOnlineUsers', (users) => {
@@ -122,7 +129,7 @@ export function SingleChat(props) {
                 <div className="chatBox py-20">
                     {messages && messages.length > 0 &&
                         messages.map((mg, index) => {
-                            const date = new Date(mg.createdAt);
+                            const date = new Date("2024-07-05T13:11:52.863+00:00");
                             return (
                                 <div key={index} className={`flex items-center ${mg.senderId === storeCurrentUser._id ? 'justify-end' : 'justify-start'}`}>
                                     <div className={`w-2/4 flex items-center`}>
