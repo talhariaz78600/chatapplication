@@ -115,14 +115,16 @@ export function SingleChat(props) {
                 {otherUserData && (
                     <div style={{ boxShadow: `2px 2px 5px rgba(0, 0, 0, 0.2)` }} className="bg-white fixed p-4 w-full">
                         <div className="flex items-center justify-between">
-                            <Link to={`/page/users/${otherUserData._id}`} className="flex items-center justify-start gap-2">
+                            <p className="flex items-center justify-start gap-2">
                                 <img src={otherUserData.ProfileImageUrl} alt="img" className="w-11 h-11 rounded-3xl" />
                                 <div>
                                     <h2 className="font-bold text-xl">
                                         {otherUserData.username}
+
                                     </h2>
+                                       {props?.onlineusers?.includes(otherUserData?._id) && <small>online</small>}
                                 </div>
-                            </Link>
+                            </p>
                         </div>
                     </div>
                 )}
@@ -147,7 +149,7 @@ export function SingleChat(props) {
                                         <div className={`w-full my-2 p-2 mx-2 rounded-md ${mg.senderId === storeCurrentUser._id ? 'bg-cyan-200 text-end' : 'bg-green-100 text-start'}`}>
                                             <p>{mg.message}</p>
                                             <p className={`text-xs italic font-semibold ${mg.senderId === storeCurrentUser._id ? 'text-left' : 'text-end'}`}>
-                                                {date && date.toLocaleString()}
+                                                {mg.createdAt && new Date(mg.createdAt).toLocaleString()}
                                             </p>
                                         </div>
                                     </div>
@@ -158,7 +160,7 @@ export function SingleChat(props) {
                     <div ref={messagesEndRef} />
                     <div style={{ boxShadow: `0px -2px 3px rgba(0, 0, 0, 0.2)` }} className="bg-white w-full fixed bottom-0 z-50 py-2 px-4">
                         <form onSubmit={sendMessage} className={`grid grid-cols-3 ${showSidebar ? 'grid-cols-3' : 'grid-cols-9'} gap-2`}>
-                            <div className={`${showSidebar ? 'col-span-2' : 'col-span-6'} w-[100%]`}>
+                            <div className={`${showSidebar ? 'col-span-2' : 'col-span-8'} w-[100%]`}>
                                 <input
                                     value={messageInput}
                                     onChange={(e) => setMessageInput(e.target.value)}

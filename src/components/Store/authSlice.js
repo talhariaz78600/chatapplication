@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   Allusers: [],
-  currentUser: null
+  currentUser: null,
+  onlineusers:[]
 };
 
 const authSlice = createSlice({
@@ -28,6 +29,15 @@ const authSlice = createSlice({
         newState.Allusers[userIndex] = Updateduser
       }
       return newState;
+    },
+    addnewUser:(state,action)=>{
+      const alluserdata=[...state.Allusers,action.payload]
+      state.Allusers=alluserdata;
+
+    },
+    addonlineUsers:(state,action)=>{
+      state.onlineusers=action.payload;
+
     }
   },
 
@@ -36,8 +46,9 @@ const authSlice = createSlice({
 
 export const selecteUsers = (state) => state.auth.Allusers;
 export const selecteCurrentUser = (state) => state.auth.currentUser;
+export const selecteOnlineUser = (state) => state.auth.onlineusers;
 
-export const { login, logout, allusers,addToAlusers,updateUser } = authSlice.actions;
+export const { login, logout, allusers,addToAlusers,updateUser,addnewUser,addonlineUsers } = authSlice.actions;
 
 export default authSlice.reducer;
 
