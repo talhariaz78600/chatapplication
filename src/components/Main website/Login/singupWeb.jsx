@@ -6,10 +6,14 @@ import { useNavigate, Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Loader } from "../Loader/loader";
+import { login } from '../../Store/authSlice';
+import CryptoJS from 'crypto-js';
+import { useDispatch } from "react-redux";
 export function SingupWebsite() {
   const serverURL = process.env.REACT_APP_SERVER_URL;
   const location = useLocation();
   let navigate = useNavigate();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [passwordfalse, setpasswordfalse] = useState(false);
   const intialData = {
@@ -35,6 +39,12 @@ export function SingupWebsite() {
       [name]: value,
     }));
   };
+
+  const secretEnKey = process.env.REACT_APP_SECRET_ENC_KEY
+  const encryptUserData = (data, secretKey) => {
+    const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(data), secretKey);
+    return encryptedData.toString();
+  }
 
 
   async function handelSubmit(e) {
@@ -70,7 +80,11 @@ export function SingupWebsite() {
         if (response.status === 200) {
           setLoading(false);
           toast.success("User Singnup successfully");
-          navigate(`/Login`);
+          const user = encryptUserData(response.data.user, secretEnKey);
+          localStorage.setItem('REAl_ESTATE_USER_DATA', JSON.stringify({ user, expiration: response.data.user.sessionExpiration }));
+          dispatch(login(response.data.user));
+          navigate("/chat/Chats")
+
         }
       }
     } catch (error) {

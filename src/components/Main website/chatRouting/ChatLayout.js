@@ -22,7 +22,7 @@ export const FulllayoutChat = () => {
     const [roomID, setRoomID] = useState(null);
     const StoreallUser = useSelector(selecteUsers)
     const StoreCurrentUser = useSelector(selecteCurrentUser)
-    const onlineusers=useSelector(selecteOnlineUser)
+    const onlineusers = useSelector(selecteOnlineUser)
     useEffect(() => {
         const data = StoreallUser.filter((item) => item._id !== StoreCurrentUser._id)
         setMyconnection(data)
@@ -62,7 +62,10 @@ export const FulllayoutChat = () => {
                                         <div key={index}>
                                             <li
                                                 className={`flex ${chatobj.chatId === roomID ? "bg-cyan-100" : ""} items-center justify-between my-2 hover:bg-gray-200 hover:shadow-none shadow-md rounded-md px-2 py-3 cursor-pointer`}
-                                                onClick={() => navigate(`/chat/Chats/${chatobj._id}`)}
+                                                onClick={() => {
+                                                    navigate(`/chat/Chats/${chatobj._id}`)
+                                                    setshowSidebar(false)
+                                                }}
                                             >
                                                 <div
                                                     onClick={async () => setRoomID(chatobj.chatId)}
@@ -98,7 +101,7 @@ export const FulllayoutChat = () => {
                     <div style={{ height: "100%", overflowY: "auto" }} className={`col-span-12      ${style.heightScroll}   ${showSidebar ? ' md:col-span-9' : 'col-span-12'}   `}>
 
                         <div className="chatbody" >
-                            <Outlet context={{onlineusers}} />
+                            <Outlet context={{ onlineusers }} />
                         </div>
 
                     </div>

@@ -29,6 +29,8 @@ function App() {
     return decryptedData;
 
   }
+
+  console.log(storeCurrentUser,"this is user data")
   useEffect(() => {
 
     if (!storeCurrentUser) {
@@ -39,15 +41,19 @@ function App() {
         if (expiration > Date.now()) {
           const userData = decryptUserData(user);
           dispatch(login(userData))
-          if (window.location.pathname === "/login") {
-            window.location.href = "/page";
+          if (window.location.pathname === "/Login") {
+            window.location.href = "/chat/Chats";
           }
         } else {
           localStorage.removeItem('REAl_ESTATE_USER_DATA');
-          if (window.location.pathname !== "/login") {
-            window.location.href = "/login";
+          if (window.location.pathname !== "/Login") {
+            window.location.href = "/Login";
           }
         }
+      }
+    }else{
+      if (window.location.pathname === "/Login") {
+        window.location.href = "/chat/Chats";
       }
     }
     // eslint-disable-next-line

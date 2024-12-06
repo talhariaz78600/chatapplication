@@ -39,7 +39,7 @@ export function ChatHeader(props) {
                             <div className="flex flex-1 items-center ml-12 sm:items-stretch justify-start">
 
                                 <Link to={'/chat/Chats'} className="flex flex-shrink-0 mx-1 items-center">
-                                    <h1 className="text-center  leading-6 text-cyan-300 hover:text-indigo-500 text-[28px] font-bold">Chat Application</h1>
+                                    <h1 className="text-center  leading-6 text-cyan-300 hover:text-indigo-500 text-[22px] font-bold">Chat Application</h1>
                                 </Link>
                             </div>
                             <div className="absolute  inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">

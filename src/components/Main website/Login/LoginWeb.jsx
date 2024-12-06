@@ -3,8 +3,8 @@ import { useNavigate, Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useDispatch } from 'react-redux';
-import { login } from '../../Store/authSlice';
 import { Loader } from "../Loader/loader";
+import { login } from '../../Store/authSlice';
 import CryptoJS from 'crypto-js';
 const serverURL = process.env.REACT_APP_SERVER_URL
 const secretEnKey = process.env.REACT_APP_SECRET_ENC_KEY
